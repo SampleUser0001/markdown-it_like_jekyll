@@ -1,0 +1,298 @@
+<!-- layouts/default.ejs -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マークダウンの高度な使い方</title>
+  <!-- Bulma CSSフレームワーク -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Highlight.js テーマ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+  <!-- カスタムCSS -->
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+<body>
+  <!-- ナビゲーションバー -->
+  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <strong>リッチなMarkdownサイト</strong>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="navMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="/">
+            <span class="icon-text">
+              <span class="icon"><i class="fas fa-home"></i></span>
+              <span>ホーム</span>
+            </span>
+          </a>
+          <a class="navbar-item" href="/about.html">
+            <span class="icon-text">
+              <span class="icon"><i class="fas fa-info-circle"></i></span>
+              <span>About</span>
+            </span>
+          </a>
+          <a class="navbar-item" href="/posts/">
+            <span class="icon-text">
+              <span class="icon"><i class="fas fa-book"></i></span>
+              <span>記事一覧</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- メインコンテンツ -->
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <h1>マークダウンの高度な使い方</h1>
+<p><strong>投稿日</strong>: &lt;%= date %&gt;<br>
+<strong>著者</strong>: &lt;%= author %&gt;</p>
+<div class="tags">
+  <span class="tag is-primary">マークダウン</span>
+  <span class="tag is-info">チュートリアル</span>
+  <span class="tag is-success">Web開発</span>
+</div>
+<h2>はじめに</h2>
+<p>マークダウンは、文書作成のための軽量マークアップ言語です。このポストでは、マークダウンの基本的な構文から高度な使い方まで解説します。また、Bulma CSSとhighlight.jsを組み合わせることで、見栄えの良いコンテンツを簡単に作成する方法も紹介します。</p>
+<div class="notification is-warning is-light">
+  <strong>注意</strong>: このポストはmarkdown-itの機能に焦点を当てています。他のマークダウンパーサーでは一部の構文が異なる場合があります。
+</div>
+<h2>基本的なマークダウン構文</h2>
+<h3>見出し</h3>
+<p>マークダウンでは、<code>#</code> の数で見出しのレベルを指定します。</p>
+<pre class="code-block"><div class="code-header">markdown</div><code class="hljs language-markdown"><span class="hljs-section"># 見出し1</span>
+<span class="hljs-section">## 見出し2</span>
+<span class="hljs-section">### 見出し3</span>
+<span class="hljs-section">#### 見出し4</span>
+<span class="hljs-section">##### 見出し5</span>
+<span class="hljs-section">###### 見出し6</span>
+</code></pre>
+<h3>テキストスタイル</h3>
+<pre class="code-block"><div class="code-header">markdown</div><code class="hljs language-markdown"><span class="hljs-emphasis">*イタリック*</span> または <span class="hljs-emphasis">_イタリック_</span>
+<span class="hljs-strong">**ボールド**</span> または <span class="hljs-strong">__ボールド__</span>
+~~打ち消し線~~
+</code></pre>
+<p>結果:
+<em>イタリック</em> または <em>イタリック</em>
+<strong>ボールド</strong> または <strong>ボールド</strong>
+<s>打ち消し線</s></p>
+<h3>リスト</h3>
+<h4>順序なしリスト</h4>
+<pre class="code-block"><div class="code-header">markdown</div><code class="hljs language-markdown"><span class="hljs-bullet">-</span> 項目1
+<span class="hljs-bullet">-</span> 項目2
+<span class="hljs-bullet">  -</span> ネストされた項目
+<span class="hljs-bullet">  -</span> もう一つのネストされた項目
+<span class="hljs-bullet">-</span> 項目3
+</code></pre>
+<h4>順序付きリスト</h4>
+<pre class="code-block"><div class="code-header">markdown</div><code class="hljs language-markdown"><span class="hljs-bullet">1.</span> 最初の項目
+<span class="hljs-bullet">2.</span> 2番目の項目
+<span class="hljs-bullet">3.</span> 3番目の項目
+</code></pre>
+<h3>リンクと画像</h3>
+<pre class="code-block"><div class="code-header">markdown</div><code class="hljs language-markdown">[<span class="hljs-string">リンクテキスト</span>](<span class="hljs-link">http://example.com</span>)
+![<span class="hljs-string">代替テキスト</span>](<span class="hljs-link">http://example.com/image.jpg</span>)
+</code></pre>
+<h2>高度なマークダウン機能</h2>
+<h3>テーブル</h3>
+<pre class="code-block"><div class="code-header">markdown</div><code class="hljs language-markdown">| 名前 | 説明 | バージョン |
+|------|------|----------|
+| markdown-it | マークダウンパーサー | 13.0.1 |
+| Bulma | CSSフレームワーク | 0.9.4 |
+| highlight.js | コードハイライト | 11.8.0 |
+</code></pre>
+<p>結果:</p>
+<table>
+<thead>
+<tr>
+<th>名前</th>
+<th>説明</th>
+<th>バージョン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>markdown-it</td>
+<td>マークダウンパーサー</td>
+<td>13.0.1</td>
+</tr>
+<tr>
+<td>Bulma</td>
+<td>CSSフレームワーク</td>
+<td>0.9.4</td>
+</tr>
+<tr>
+<td>highlight.js</td>
+<td>コードハイライト</td>
+<td>11.8.0</td>
+</tr>
+</tbody>
+</table>
+<h3>コードブロック</h3>
+<p>言語を指定することで、シンタックスハイライトが適用されます:</p>
+<h4>JavaScript</h4>
+<pre class="code-block"><div class="code-header">javascript</div><code class="hljs language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateFactorial</span>(<span class="hljs-params">n</span>) {
+  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span> || n === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  }
+  <span class="hljs-keyword">return</span> n * <span class="hljs-title function_">calculateFactorial</span>(n - <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">calculateFactorial</span>(<span class="hljs-number">5</span>)); <span class="hljs-comment">// 120</span>
+</code></pre>
+<h4>Python</h4>
+<pre class="code-block"><div class="code-header">python</div><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_factorial</span>(<span class="hljs-params">n</span>):
+    <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> n == <span class="hljs-number">1</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>
+    <span class="hljs-keyword">return</span> n * calculate_factorial(n - <span class="hljs-number">1</span>)
+
+<span class="hljs-built_in">print</span>(calculate_factorial(<span class="hljs-number">5</span>))  <span class="hljs-comment"># 120</span>
+</code></pre>
+<h4>CSS</h4>
+<pre class="code-block"><div class="code-header">css</div><code class="hljs language-css"><span class="hljs-selector-class">.code-block</span> {
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">1.5em</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">6px</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">3px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0.1</span>);
+  <span class="hljs-attribute">overflow</span>: hidden;
+}
+
+<span class="hljs-selector-class">.code-header</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#2d2d2d</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#ffffff</span>;
+  <span class="hljs-attribute">font-family</span>: monospace;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0.5rem</span> <span class="hljs-number">1rem</span>;
+}
+</code></pre>
+<h3>引用</h3>
+<pre class="code-block"><div class="code-header">markdown</div><code class="hljs language-markdown"><span class="hljs-quote">&gt; これは引用です。</span>
+<span class="hljs-quote">&gt; 複数行にまたがる引用もできます。</span>
+<span class="hljs-quote">&gt;
+&gt; 段落を分けることもできます。</span>
+</code></pre>
+<p>結果:</p>
+<blockquote>
+<p>これは引用です。
+複数行にまたがる引用もできます。</p>
+<p>段落を分けることもできます。</p>
+</blockquote>
+<h2>Bulmaコンポーネントの活用</h2>
+<p>マークダウン内にHTMLを直接記述することで、Bulmaのコンポーネントを利用できます。</p>
+<h3>カード</h3>
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      コンポーネント
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      Bulmaのカードコンポーネントは、様々な情報をまとめて表示するのに便利です。
+      <br>
+      <time datetime="2023-04-12">2023年4月12日</time>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="#" class="card-footer-item">保存</a>
+    <a href="#" class="card-footer-item">編集</a>
+    <a href="#" class="card-footer-item">削除</a>
+  </footer>
+</div>
+<h3>プログレスバー</h3>
+<p><progress class="progress is-primary" value="60" max="100">60%</progress></p>
+<h3>タブ</h3>
+<div class="tabs is-boxed">
+  <ul>
+    <li class="is-active"><a>画像</a></li>
+    <li><a>音楽</a></li>
+    <li><a>動画</a></li>
+    <li><a>ドキュメント</a></li>
+  </ul>
+</div>
+<h2>まとめ</h2>
+<div class="message is-info">
+  <div class="message-header">
+    <p>ポイント</p>
+  </div>
+  <div class="message-body">
+    <p>マークダウンとBulma CSSを組み合わせることで、以下のようなメリットがあります：</p>
+    <ul>
+      <li>シンプルな構文で文書を作成できる</li>
+      <li>美しいスタイリングが簡単に適用できる</li>
+      <li>highlight.jsによるコードハイライトで可読性が向上</li>
+      <li>HTMLを直接書くことで複雑なコンポーネントも利用可能</li>
+    </ul>
+  </div>
+</div>
+<div class="columns">
+  <div class="column">
+    <div class="notification is-primary">
+      マークダウンの基本を学ぶことで、ドキュメントやブログ記事をスピーディーに作成できます。
+    </div>
+  </div>
+  <div class="column">
+    <div class="notification is-link">
+      BulmaのようなCSSフレームワークを活用して、デザイン性の高いコンテンツを実現しましょう。
+    </div>
+  </div>
+  <div class="column">
+    <div class="notification is-success">
+      コードハイライト機能で、プログラミング関連の記事を読みやすく魅力的にできます。
+    </div>
+  </div>
+</div>
+<hr>
+<footer class="footer" style="padding: 1.5rem;">
+  <div class="content has-text-centered">
+    <p>
+      <strong>著者:</strong> <%= author %> | <strong>公開日:</strong> <%= date %>
+    </p>
+  </div>
+</footer>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>リッチなMarkdownサイト</strong> - 
+        &copy; 2025 | 
+        Powered by <a href="https://github.com/markdown-it/markdown-it">markdown-it</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- JavaScriptの追加 -->
+  <script>
+    // モバイル用ナビゲーションメニューの切り替え
+    document.addEventListener('DOMContentLoaded', () => {
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      if ($navbarBurgers.length > 0) {
+        $navbarBurgers.forEach( el => {
+          el.addEventListener('click', () => {
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
