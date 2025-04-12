@@ -76,7 +76,14 @@ class JekyllLikeMarkdown {
     this.createCustomCss(path.join(cssDir, 'custom.css'));
     
     // レイアウトCSSをコピー
-    this.copyLayoutCss(path.join(this.layoutsDir, 'css'), cssDir);
+    this.copyLayout(path.join(this.layoutsDir, 'css'), cssDir);
+
+    // フォントファイルをコピー
+    const webfontsDir = path.join(this.outputDir, 'content', 'webfonts');
+    if (!fs.existsSync(webfontsDir)) {
+      fs.mkdirSync(webfontsDir, { recursive: true });
+    }
+    this.copyLayout(path.join(this.layoutsDir, 'webfonts'), webfontsDir);
   }
 
   // カスタムCSSを生成
@@ -155,19 +162,17 @@ class JekyllLikeMarkdown {
     fs.writeFileSync(cssPath, cssContent);
   }
 
-  copyLayoutCss(sourceDir, destDir) {
+  copyLayout(sourceDir, destDir) {
     if (!fs.existsSync(sourceDir)) {
       console.warn(`Layouts CSS directory does not exist: ${sourceDir}`);
       return;
     }
     const files = fs.readdirSync(sourceDir);
     files.forEach(file => {
-      if (file.endsWith('.css')) {
-        const srcPath = path.join(sourceDir, file);
-        const destPath = path.join(destDir, file);
-        fs.copyFileSync(srcPath, destPath);
-        console.log(`Copied layout CSS: ${srcPath} -> ${destPath}`);
-      }
+      const srcPath = path.join(sourceDir, file);
+      const destPath = path.join(destDir, file);
+      fs.copyFileSync(srcPath, destPath);
+      console.log(`Copied layout CSS: ${srcPath} -> ${destPath}`);
     });
   }
 
