@@ -48,3 +48,5 @@ jspm_packages/
 node_modules
 
 .python-version
+
+_site

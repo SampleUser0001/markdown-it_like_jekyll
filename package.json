@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node example-usage.js",
+    "clean": "rm -rf _site/",
+    "build": "npm run clean && node example-usage.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
