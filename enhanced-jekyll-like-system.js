@@ -67,13 +67,16 @@ class JekyllLikeMarkdown {
     }
     
     // カスタムCSSディレクトリを作成
-    const cssDir = path.join(this.outputDir, 'css');
+    const cssDir = path.join(this.outputDir, 'content', 'css');
     if (!fs.existsSync(cssDir)) {
       fs.mkdirSync(cssDir, { recursive: true });
     }
     
     // カスタムCSSファイルを作成
     this.createCustomCss(path.join(cssDir, 'custom.css'));
+    
+    // レイアウトCSSをコピー
+    this.copyLayoutCss(path.join(this.layoutsDir, 'css'), cssDir);
   }
 
   // カスタムCSSを生成
@@ -150,6 +153,22 @@ class JekyllLikeMarkdown {
     `;
     
     fs.writeFileSync(cssPath, cssContent);
+  }
+
+  copyLayoutCss(sourceDir, destDir) {
+    if (!fs.existsSync(sourceDir)) {
+      console.warn(`Layouts CSS directory does not exist: ${sourceDir}`);
+      return;
+    }
+    const files = fs.readdirSync(sourceDir);
+    files.forEach(file => {
+      if (file.endsWith('.css')) {
+        const srcPath = path.join(sourceDir, file);
+        const destPath = path.join(destDir, file);
+        fs.copyFileSync(srcPath, destPath);
+        console.log(`Copied layout CSS: ${srcPath} -> ${destPath}`);
+      }
+    });
   }
 
   // markdownファイルを処理する
