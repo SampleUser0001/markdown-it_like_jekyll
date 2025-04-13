@@ -142,7 +142,7 @@ class JekyllLikeMarkdown {
 }
 
 .content table th {
-  background-color: #f5f5f5;
+  background-color: #000040;
 }
 
 .content table tr:hover {
