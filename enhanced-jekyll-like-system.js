@@ -25,6 +25,14 @@ class JekyllLikeMarkdown {
       }
     });
 
+    // 目次の生成
+    this.md.use(require("markdown-it-anchor")); // Optional, but makes sense as you really want to link to something
+    this.md.use(require("markdown-it-table-of-contents"), {
+      includeLevel: [1, 2, 3],
+      containerClass: 'toc',
+      markerClass: 'toc-marker'
+    });
+
     // MDリンクの拡張子をhtmlに変換するカスタム処理
     const defaultRender = this.md.renderer.rules.link_open || function(tokens, idx, options, env, self) {
       return self.renderToken(tokens, idx, options);
