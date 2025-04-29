@@ -98,6 +98,10 @@ class JekyllLikeMarkdown {
   createCustomCss(cssPath) {
     const cssContent = `
 /* カスタムスタイル */
+.section {
+  margin-top: 30px;
+}
+
 .content {
   margin-bottom: 2rem;
 }

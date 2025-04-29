@@ -6,8 +6,8 @@
   "scripts": {
     "clean": "rm -rf _site/",
     "build": "npm run clean && node example-usage.js",
-    "watch_md": "node watch_md.js",
-    "start": "node server.js",
+    "watch": "node watch_md.js",
+    "server": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
