@@ -321,7 +321,7 @@ class JekyllLikeMarkdown {
     console.log(`Processed ${results.length} markdown files.`);
     
     // 静的コンテンツディレクトリもコピー
-    this.copyStaticFiles(contentDir);
+    this.copyStaticFiles(contentDir, path.join(this.outputDir, 'content'));
     
     console.log(`Site built successfully to ${this.outputDir}`);
     return results;
